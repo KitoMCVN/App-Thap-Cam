@@ -1,23 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 
-const useClickToCopy = (text: HTMLElement) => {
-  const [copied, setCopied] = useState(false);
+interface UseClickToCopy {
+  copySuccess: boolean;
+  textAreaRef: React.RefObject<HTMLInputElement>;
+  copyToClipboard: () => void;
+}
+
+export const useClickToCopy = (timeout: number = 10000): UseClickToCopy => {
+  const [copySuccess, setCopySuccess] = useState(false);
+  const textAreaRef = useRef<HTMLInputElement>(null);
 
   const copyToClipboard = () => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => setCopied(true))
-      .catch((error) => console.error("Failed to copy:", error));
+    if (textAreaRef.current) {
+      const text = textAreaRef.current.value;
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          setCopySuccess(true);
+          setTimeout(() => setCopySuccess(false), timeout);
+        })
+        .catch((err) => {
+          console.error("Failed to copy text: ", err);
+        });
+    }
   };
 
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [copied]);
-
-  return { copied, copyToClipboard };
+  return { copySuccess, textAreaRef, copyToClipboard };
 };
-
-export default useClickToCopy;

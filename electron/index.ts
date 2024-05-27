@@ -19,6 +19,7 @@ function createWindow() {
     webPreferences: {
       preload: join(__dirname, "preload.js"),
     },
+    icon: __dirname + "./resources/app.ico",
   });
 
   const port = process.env.PORT || 3000;

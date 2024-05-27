@@ -74,6 +74,9 @@
       "main",
       "src/out"
     ],
+    "win": {
+      "icon": "../electron/resources/app.ico"
+    },
     "directories": {
       "buildResources": "resources"
     }

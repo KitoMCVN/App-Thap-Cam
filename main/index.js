@@ -21,6 +21,7 @@ function createWindow() {
         webPreferences: {
             preload: (0, path_1.join)(__dirname, "preload.js"),
         },
+        icon: __dirname + "./resources/app.ico",
     });
     const port = process.env.PORT || 3000;
     const url = electron_is_dev_1.default ? `http://localhost:${port}` : (0, path_1.join)(__dirname, "../src/out/index.html");
