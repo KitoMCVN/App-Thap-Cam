@@ -11,75 +11,20 @@ const useFetch = <H extends AxiosHeaders, B>(url: string, method: Method, header
   useEffect(() => {
     setLoading(true);
     const source = axios.CancelToken.source();
-    switch (method) {
-      case "GET":
-        axios
-          .get(url, {
-            cancelToken: source.token,
-            headers: headers,
-          })
-          .then((res) => {
-            setLoading(false);
-            res.data && setData(res.data);
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
-          });
-        break;
-      case "POST":
-        axios
-          .post(url, {
-            cancelToken: source.token,
-            headers: headers,
-            data: body,
-          })
-          .then((res) => {
-            setLoading(false);
-            res.data && setData(res.data);
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
-          });
-        break;
-      case "PUT":
-        axios
-          .put(url, {
-            cancelToken: source.token,
-            headers: headers,
-            data: body,
-          })
-          .then((res) => {
-            setLoading(false);
-            res.data && setData(res.data);
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
-          });
-        break;
-      case "DELETE":
-        axios
-          .delete(url, {
-            cancelToken: source.token,
-            headers: headers,
-            data: body,
-          })
-          .then((res) => {
-            setLoading(false);
-            res.data && setData(res.data);
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
-          });
-        break;
-      default:
-        setError("Invalid Method?");
-        break;
-    }
-
+    axios(url, {
+      method: method,
+      cancelToken: source.token,
+      headers: headers,
+      data: body,
+    })
+      .then((res) => {
+        setLoading(false);
+        res.data && setData(res.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+      });
     return () => {
       source.cancel();
     };
