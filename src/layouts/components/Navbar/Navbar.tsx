@@ -1,5 +1,5 @@
 import React from "react";
-import { useLanguage } from "../../../hook";
+import { useLanguage } from "../../../hooks";
 
 const Navbar: React.FC = () => {
   const { t, h } = useLanguage();
@@ -12,4 +12,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-

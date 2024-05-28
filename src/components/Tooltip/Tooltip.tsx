@@ -11,7 +11,7 @@ interface TooltipProps {
   content: React.ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", effect = "zoom", followMouse = false, timeout = 2000, delay = 0, content, children }) => {
+const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", effect = "zoom", followMouse = false, timeout, delay = 0, content, children }) => {
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -21,7 +21,7 @@ const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", ef
       clearTimeout(timeoutRef.current);
     }
 
-    if (visible) {
+    if (visible && timeout !== undefined) {
       timeoutRef.current = setTimeout(() => {
         setVisible(false);
       }, timeout);
@@ -50,7 +50,8 @@ const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", ef
       {visible && (
         <div
           id="tooltip"
-          className={`absolute z-10s ${
+          data-animation={effect}
+          className={`absolute z-10 ${
             direction === "top"
               ? "bottom-full left-1/2 transform -translate-x-1/2 mb-2"
               : direction === "right"

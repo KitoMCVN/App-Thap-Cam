@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { LanguageProvider } from "./hook";
+import { LanguageProvider } from "./hooks";
 
 ReactDOM.render(
   <React.StrictMode>

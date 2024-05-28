@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const UtilsBar = () => {
+const UtilsBar: React.FC = () => {
   const [toggleBar, setToggleBar] = useState(false);
   return (
     <aside
