@@ -1,23 +1,38 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TitleBar from "./TitleBar";
 import { isElectron } from "./utils/isElectron";
-import Routes from "./Routes";
-import Image from "./components/Image/Image";
-import { useClickToCopy, useLanguage, ThemeProvider } from "./hooks";
-import { Button } from "./components/Button";
-import Tooltip from "./components/Tooltip/Tooltip";
+import { ThemeProvider } from "./hooks";
+import { DefaultRouter } from "./routers/router";
+import "./App.scss";
 
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <section className={`min-h-screen w-screen bg-white ${isElectron() ? "rounded-md border border-gray-900/10" : ""}`}>
-        <div className="size-full">{isElectron() && <TitleBar />}</div>
-        <Routes></Routes>
-
-        <div className="size-96">
-          <Image src="https://c4.wallpaperflare.com/wallpaper/448/174/357/neon-4k-hd-best-for-desktop-wallpaper-thumb.jpqg"></Image>
+      <div className={`bg-white h-screen w-screen ${isElectron() ? "rounded-md" : ""}`}>
+        <div className="w-screen h-dvh overflow-hidden">
+          {isElectron() && (
+            <div className="size-full">
+              <TitleBar />
+            </div>
+          )}
+          <Router>
+            <Routes>
+              {DefaultRouter.map((route, index) => (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <route.layout>
+                      <route.component />
+                    </route.layout>
+                  }
+                />
+              ))}
+            </Routes>
+          </Router>
         </div>
-      </section>
+      </div>
     </ThemeProvider>
   );
 };

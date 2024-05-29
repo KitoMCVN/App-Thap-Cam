@@ -11,26 +11,28 @@ const useFetch = <H extends AxiosHeaders, B>(url: string, method: Method, header
   useEffect(() => {
     setLoading(true);
     const source = axios.CancelToken.source();
-    axios(url, {
-      method: method,
-      cancelToken: source.token,
-      headers: headers,
-      data: body,
-    })
-      .then((res) => {
-        setLoading(false);
-        res.data && setData(res.data);
+    const intervalId = setInterval(async () => {
+      setLoading(true);
+      axios(url, {
+        method: method,
+        cancelToken: source.token,
+        headers: headers,
+        data: body,
       })
-      .catch((err) => {
-        setLoading(false);
-        setError(err);
-      });
+        .then((res) => {
+          setLoading(false);
+          res.data && setData(res.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(err);
+        });
+    }, 2 * 60 * 1000);
     return () => {
       source.cancel();
+      clearInterval(intervalId);
     };
   }, [body, headers, method, url]);
-
   return { data, loading, error };
 };
-
 export default useFetch;
