@@ -3,11 +3,11 @@ import axios, { AxiosHeaders } from "axios";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
-const useFetch = <H extends AxiosHeaders, B>(
+const useFetch = (
   url: string,
   method: Method,
-  headers?: H,
-  body?: B
+  headers?: AxiosHeaders | Map<string, unknown> | any,
+  body?: any
 ) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
