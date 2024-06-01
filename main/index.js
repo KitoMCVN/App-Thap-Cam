@@ -13,8 +13,7 @@ function createWindow() {
     const window = new electron_1.BrowserWindow({
         width,
         height,
-        hasShadow: true,
-        transparent: true,
+        // transparent: true,
         frame: false,
         show: true,
         resizable: true,

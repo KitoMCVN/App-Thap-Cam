@@ -11,7 +11,7 @@ function createWindow() {
   const window = new BrowserWindow({
     width,
     height,
-    transparent: true,
+    // transparent: true,
     frame: false,
     show: true,
     resizable: true,
