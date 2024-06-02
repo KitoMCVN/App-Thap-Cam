@@ -9,7 +9,11 @@ import "./App.scss";
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className={`bg-white h-screen w-screen ${isElectron() ? "rounded-md" : ""}`}>
+      <div
+        className={`bg-white h-screen w-screen ${
+          isElectron() ? "rounded-md" : ""
+        }`}
+      >
         <div className="w-screen h-dvh overflow-hidden">
           {isElectron() && (
             <div className="size-full">
