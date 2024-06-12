@@ -9,17 +9,16 @@ import "./App.scss";
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div
-        className={`bg-white h-screen w-screen ${
+      <section
+        className={`flex h-screen w-screen flex-col bg-rose-100 ${
           isElectron() ? "rounded-md" : ""
         }`}
       >
-        <div className="w-screen h-dvh overflow-hidden">
-          {isElectron() && (
-            <div className="size-full">
-              <TitleBar />
-            </div>
-          )}
+        <div
+          id={isElectron() ? "app" : ""}
+          className="h-full overflow-hidden font-['Space_Grotesk',sans-serif]"
+        >
+          {isElectron() && (<TitleBar />)}
           <Router>
             <Routes>
               {DefaultRouter.map((route, index) => (
@@ -36,7 +35,7 @@ const App: React.FC = () => {
             </Routes>
           </Router>
         </div>
-      </div>
+      </section>
     </ThemeProvider>
   );
 };

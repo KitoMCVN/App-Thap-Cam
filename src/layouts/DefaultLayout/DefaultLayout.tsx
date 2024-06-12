@@ -6,9 +6,9 @@ interface DefaultLayoutProps {
 }
 const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
-    <div>
-      <Sidebar id={0}></Sidebar>
-      <div>{children}</div>
+    <div className="flex-warp flex h-full gap-5 p-5">
+      <Sidebar></Sidebar>
+      <div className="h-full w-full rounded-lg bg-rose-300 p-5">{children}</div>
     </div>
   );
 };
