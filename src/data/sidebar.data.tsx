@@ -1,13 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { useLanguage } from "../hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons"; // Import the icon you need
-import React from "react";
+import { faGear, faHome } from "@fortawesome/free-solid-svg-icons";
 
 export interface SidebarDataProps {
   id?: number;
   title?: string;
   path?: string;
-  icon?: string;
+  icon?: JSX.Element;
+  notification?: number | string;
 }
 
 export const sidebarData = (): SidebarDataProps[] => {
@@ -18,7 +19,15 @@ export const sidebarData = (): SidebarDataProps[] => {
       id: 1,
       title: t("home"),
       path: "/",
-      icon: "faHouse",
+      icon: <FontAwesomeIcon icon={faHome} />,
+      notification: 2122,
+    },
+    {
+      id: 2,
+      title: t("setting"),
+      path: "/",
+      icon: <FontAwesomeIcon icon={faGear} />,
+      notification: "new",
     },
   ];
 };

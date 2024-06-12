@@ -8,7 +8,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
     <div className="flex-warp flex h-full gap-5 p-5">
       <Sidebar></Sidebar>
-      <div className="h-full w-full rounded-lg bg-rose-300 p-5">{children}</div>
+      <div className="h-full w-full rounded-lg bg-rose-50 p-5">{children}</div>
     </div>
   );
 };

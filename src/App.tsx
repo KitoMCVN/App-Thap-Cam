@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <section
-        className={`flex h-screen w-screen flex-col bg-rose-100 ${
+        className={`flex h-screen w-screen flex-col bg-white ${
           isElectron() ? "rounded-md" : ""
         }`}
       >
@@ -18,7 +18,7 @@ const App: React.FC = () => {
           id={isElectron() ? "app" : ""}
           className="h-full overflow-hidden font-['Space_Grotesk',sans-serif]"
         >
-          {isElectron() && (<TitleBar />)}
+          {isElectron() && <TitleBar />}
           <Router>
             <Routes>
               {DefaultRouter.map((route, index) => (
