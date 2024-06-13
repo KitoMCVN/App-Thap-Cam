@@ -25,7 +25,14 @@ export const sidebarData = (): SidebarDataProps[] => {
     {
       id: 2,
       title: t("setting"),
-      path: "/",
+      path: "/setting",
+      icon: <FontAwesomeIcon icon={faGear} />,
+      notification: "new",
+    },
+    {
+      id: 3,
+      title: t("settings"),
+      path: "/settings",
       icon: <FontAwesomeIcon icon={faGear} />,
       notification: "new",
     },

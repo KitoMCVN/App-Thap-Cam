@@ -1,21 +1,10 @@
 import React from "react";
-import { sidebarData, SidebarDataProps } from "../../../data/sidebar.data";
-import { SidebarItem } from "./components/SidebarLink";
+import { SidebarLinks } from "./components/SidebarLinks";
 
-const Sidebar: React.FC<SidebarDataProps> = () => {
-  const SidebarData = sidebarData();
-
+const Sidebar: React.FC = () => {
   return (
-    <div className="rounded-lg bg-rose-50 p-3 text-rose-950">
-      {SidebarData.map((item) => (
-        <SidebarItem
-          key={item.id}
-          path={item.path}
-          title={item.title}
-          icon={item.icon}
-          notification={item.notification}
-        ></SidebarItem>
-      ))}
+    <div className="w-72 rounded-lg bg-rose-50 p-3 text-rose-950">
+      <SidebarLinks></SidebarLinks>
     </div>
   );
 };
