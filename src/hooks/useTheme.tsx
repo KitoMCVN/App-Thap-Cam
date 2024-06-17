@@ -16,6 +16,12 @@ export const ThemeProvider: React.FC<{children: React.ReactNode}> = ({children})
 
     useEffect(() => {
         localStorage.setItem("application_theme", theme);
+    
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
     }, [theme])
     const contextValue = useMemo(() => ({ theme, setTheme }), [theme, setTheme]);
     return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>

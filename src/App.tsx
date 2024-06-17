@@ -10,9 +10,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <section
-        className={`flex h-screen w-screen flex-col bg-rose-200 ${
-          isElectron() ? "rounded-md" : ""
-        }`}
+        className={`flex h-screen w-screen flex-col bg-rose-200 dark:bg-neutral-950`}
       >
         <div
           id={isElectron() ? "app" : ""}

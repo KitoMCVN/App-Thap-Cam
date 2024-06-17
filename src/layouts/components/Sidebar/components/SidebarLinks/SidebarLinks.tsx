@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { sidebarData } from "../../../../../data/sidebar.data";
 
-const SidebarLinks: React.FC = () => {
+interface SidebarLinksProps {
+  className?: string;
+}
+
+const SidebarLinks: React.FC<SidebarLinksProps> = ({ className }) => {
   const location = useLocation();
   const SidebarData = sidebarData();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -20,7 +24,7 @@ const SidebarLinks: React.FC = () => {
   console.log(activeIndex);
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       {SidebarData.map((item) => {
         const formattedNotification =
           item.notification === "new"
@@ -36,15 +40,15 @@ const SidebarLinks: React.FC = () => {
             style={{ height: linkHeigh + "px" }}
           >
             <Link className={`block w-full px-3 py-3`} to={item.path as string}>
-              <div className="flex items-center">
-                <div className="mr-2">{item.icon}</div>
-                <div>{item.title}</div>
+              <div className="flex items-center justify-center md:justify-normal">
+                <div className="md:mr-2">{item.icon}</div>
+                <div className="hidden md:block">{item.title}</div>
                 {formattedNotification ? (
                   <div
-                    className={`ml-auto rounded-lg ${
+                    className={`ml-auto hidden rounded-lg md:block ${
                       formattedNotification === "new"
                         ? "bg-yellow-600"
-                        : "bg-rose-950"
+                        : "bg-rose-950 dark:bg-rose-400"
                     } px-2 pt-[2px] text-sm text-rose-50`}
                   >
                     {formattedNotification === "new"
@@ -59,7 +63,7 @@ const SidebarLinks: React.FC = () => {
       })}
       {activeIndex !== null && (
         <motion.div
-          className="absolute top-0 z-0 h-12 w-full rounded-lg bg-rose-100"
+          className="absolute top-0 z-0 h-12 w-full rounded-lg bg-rose-100 dark:bg-neutral-700"
           initial={{ y: activeIndex * linkHeigh }}
           animate={{ y: activeIndex * linkHeigh }}
           transition={{
