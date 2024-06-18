@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { sidebarData } from "../../../../../data/sidebar.data";
+import { Tooltip } from "../../../../../components/Tooltip";
 
 interface SidebarLinksProps {
   className?: string;
@@ -39,25 +40,30 @@ const SidebarLinks: React.FC<SidebarLinksProps> = ({ className }) => {
             className="relative z-[1] overflow-hidden rounded-lg"
             style={{ height: linkHeigh + "px" }}
           >
-            <Link className={`block w-full px-3 py-3`} to={item.path as string}>
-              <div className="flex items-center justify-center md:justify-normal">
-                <div className="md:mr-2">{item.icon}</div>
-                <div className="hidden md:block">{item.title}</div>
-                {formattedNotification ? (
-                  <div
-                    className={`ml-auto hidden rounded-lg md:block ${
-                      formattedNotification === "new"
-                        ? "bg-yellow-600"
-                        : "bg-rose-950 dark:bg-rose-400"
-                    } px-2 pt-[2px] text-sm text-rose-50`}
-                  >
-                    {formattedNotification === "new"
-                      ? "New"
-                      : formattedNotification}
-                  </div>
-                ) : null}
-              </div>
-            </Link>
+            <Tooltip className="w-full" content={item.title}>
+              <Link
+                className={`block w-full px-3 py-3`}
+                to={item.path as string}
+              >
+                <div className="flex items-center justify-center md:justify-normal">
+                  <div className="md:mr-2">{item.icon}</div>
+                  <div className="hidden md:block">{item.title}</div>
+                  {formattedNotification ? (
+                    <div
+                      className={`ml-auto hidden rounded-lg md:block ${
+                        formattedNotification === "new"
+                          ? "bg-yellow-600"
+                          : "bg-rose-950 dark:bg-rose-400"
+                      } px-2 pt-[2px] text-sm text-rose-50`}
+                    >
+                      {formattedNotification === "new"
+                        ? "New"
+                        : formattedNotification}
+                    </div>
+                  ) : null}
+                </div>
+              </Link>
+            </Tooltip>
           </div>
         );
       })}

@@ -9,9 +9,19 @@ interface TooltipProps {
   timeout?: number;
   delay?: number;
   content: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", effect = "zoom", followMouse = false, timeout, delay = 0, content, children }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  className = "",
+  direction = "top",
+  effect = "zoom",
+  followMouse = false,
+  timeout,
+  delay = 0,
+  content,
+  children,
+}) => {
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -42,10 +52,17 @@ const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", ef
     }
   };
 
-  const tooltipStyle = followMouse ? { top: `${coords.y}px`, left: `${coords.x}px` } : {};
+  const tooltipStyle = followMouse
+    ? { top: `${coords.y}px`, left: `${coords.x}px` }
+    : {};
 
   return (
-    <div className={`relative inline-block ${className}`} onMouseEnter={showTooltip} onMouseLeave={hideTooltip} onMouseMove={followMouse ? showTooltip : undefined}>
+    <div
+      className={`relative inline-block ${className}`}
+      onMouseEnter={showTooltip}
+      onMouseLeave={hideTooltip}
+      onMouseMove={followMouse ? showTooltip : undefined}
+    >
       {children}
       {visible && (
         <div
@@ -53,27 +70,27 @@ const Tooltip: React.FC<TooltipProps> = ({ className = "", direction = "top", ef
           data-animation={effect}
           className={`absolute z-10 ${
             direction === "top"
-              ? "bottom-full left-1/2 transform -translate-x-1/2 mb-2"
+              ? "bottom-full left-1/2 mb-2 -translate-x-1/2 transform"
               : direction === "right"
-              ? "top-1/2 right-full transform translate-y-1/2 mr-2"
-              : direction === "bottom"
-              ? "top-full left-1/2 transform -translate-x-1/2 mt-2"
-              : "top-1/2 left-full transform -translate-y-1/2 ml-2"
+                ? "right-full top-1/2 mr-2 translate-y-1/2 transform"
+                : direction === "bottom"
+                  ? "left-1/2 top-full mt-2 -translate-x-1/2 transform"
+                  : "left-full top-1/2 ml-2 -translate-y-1/2 transform"
           }`}
           style={tooltipStyle}
         >
-          <div className={`relative bg-black text-white rounded px-2 py-1`}>
+          <div className={`relative rounded bg-black px-2 py-1 text-white`}>
             {content}
             <div
-              className={`absolute w-2 h-2 ${
+              className={`absolute h-2 w-2 ${
                 direction === "top"
-                  ? "top-full left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  ? "left-1/2 top-full -translate-x-1/2 -translate-y-1/2 transform"
                   : direction === "right"
-                  ? "top-1/2 left-full transform -translate-y-1/2 -translate-x-1/2"
-                  : direction === "bottom"
-                  ? "bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                  : "bottom-1/2 right-full transform translate-y-1/2 -translate-x-1/2"
-              }  bg-black -rotate-45`}
+                    ? "left-full top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+                    : direction === "bottom"
+                      ? "bottom-full left-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+                      : "bottom-1/2 right-full -translate-x-1/2 translate-y-1/2 transform"
+              } -rotate-45 bg-black`}
             />
           </div>
         </div>

@@ -45,6 +45,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
+    "react-spring": "^9.7.3",
     "sass": "^1.77.4",
     "vite": "^5.2.12"
   },
