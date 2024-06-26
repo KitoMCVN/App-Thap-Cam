@@ -45,12 +45,12 @@ const SidebarLinks: React.FC<SidebarLinksProps> = ({ className }) => {
                 className={`block w-full px-3 py-3`}
                 to={item.path as string}
               >
-                <div className="flex items-center justify-center md:justify-normal">
-                  <div className="md:mr-2">{item.icon}</div>
-                  <div className="hidden md:block">{item.title}</div>
+                <div className="flex items-center">
+                  <div className="mr-2">{item.icon}</div>
+                  <div className="block">{item.title}</div>
                   {formattedNotification ? (
                     <div
-                      className={`ml-auto hidden rounded-lg md:block ${
+                      className={`ml-auto block rounded-lg ${
                         formattedNotification === "new"
                           ? "bg-yellow-600"
                           : "bg-rose-950 dark:bg-rose-400"

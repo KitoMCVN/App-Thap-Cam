@@ -414,7 +414,7 @@ const TinderCard = forwardRef<unknown, TinderCardProps>(
           ),
         }}
       >
-        {children}z
+        {children}
       </AnimatedDiv>
     );
   },

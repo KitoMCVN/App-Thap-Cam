@@ -1,4 +1,8 @@
 {
   "home": "Home",
-  "setting": "Setting"
+  "setting": "Setting",
+  "ai-chat": "AI Chat",
+  "login": "Login",
+  "register": "Register",
+  "logout": "Logout"
 }

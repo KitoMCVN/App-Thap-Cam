@@ -1,15 +1,32 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type ButtonProps = {
   href?: string;
+  to?: string;
   onClick?: () => void;
   children: React.ReactNode;
   className?: string;
 } & React.ComponentPropsWithoutRef<"a"> &
   React.ComponentPropsWithoutRef<"button">;
-  
-const Button: React.FC<ButtonProps> = ({ href, onClick, children, className = "", ...props }) => {
-  const buttonStyle = `text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 transition ${className}`;
+
+const Button: React.FC<ButtonProps> = ({
+  href,
+  to,
+  onClick,
+  children,
+  className = "",
+  ...props
+}) => {
+  const buttonStyle = `${className}`;
+
+  if (to) {
+    return (
+      <Link to={to} className={buttonStyle} role="button" {...props}>
+        {children}
+      </Link>
+    );
+  }
 
   if (href) {
     return (
@@ -20,7 +37,11 @@ const Button: React.FC<ButtonProps> = ({ href, onClick, children, className = ""
   }
 
   return (
-    <button onClick={onClick} className={buttonStyle} {...props}>
+    <button
+      onClick={onClick}
+      className="flex h-full items-center justify-center bg-neutral-600 px-4 py-1"
+      {...props}
+    >
       {children}
     </button>
   );
